@@ -90,6 +90,13 @@ class Passport
     public static $useClientUUIDs = false;
 
     /**
+     * Indicates the name of the primary keys to be used
+     *
+     * @var string|null
+     */
+    public static $keyNameForUUIDsPK = null;
+
+    /**
      * Enable the implicit grant type.
      *
      * @return static
@@ -348,6 +355,19 @@ class Passport
     public static function useClientUUIDs()
     {
         static::$useClientUUIDs = true;
+
+        return new static;
+    }
+
+    /**
+     * Instruct Passport to use UUIDs for identifying clients.
+     *
+     * @param string|null $keyName
+     * @return static
+     */
+    public static function useKeyNameForUUIDsPK($keyName = null)
+    {
+        static::$keyNameForUUIDsPK = $keyName;
 
         return new static;
     }

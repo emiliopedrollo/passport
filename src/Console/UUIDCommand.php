@@ -32,27 +32,32 @@ class UUIDCommand extends Command
      */
     public function handle()
     {
-        $this->comment('Checking for `uuid` column in `oauth_clients`...');
+        // TODO: migrate to compatible structure
 
-        if (!Schema::hasColumn('oauth_clients', 'uuid')) {
-            Schema::table('oauth_clients', function(Blueprint $table) {
-                $table->char('uuid', 36)->unique()->after('name')->nullable();
-            });
+        $this->error("Not implemented yet. Sorry. :(");
+        return;
 
-            $this->line('✓ Created new column `uuid` in `oauth_clients`.');
-        } else {
-            $this->line('✓ OK.');
-        }
-
-        $this->comment('Generating version 4 UUIDs for Passport clients...');
-
-        $clients = Client::where('uuid', null)->get();
-
-        foreach($clients as $client) {
-            $client->uuid = UUID::uuid4()->toString();
-            $client->save();
-        }
-
-        $this->line('✓ Done.');
+//        $this->comment('Checking for `uuid` column in `oauth_clients`...');
+//
+//        if (!Schema::hasColumn('oauth_clients', 'uuid')) {
+//            Schema::table('oauth_clients', function(Blueprint $table) {
+//                $table->char('uuid', 36)->unique()->after('name')->nullable();
+//            });
+//
+//            $this->line('✓ Created new column `uuid` in `oauth_clients`.');
+//        } else {
+//            $this->line('✓ OK.');
+//        }
+//
+//        $this->comment('Generating version 4 UUIDs for Passport clients...');
+//
+//        $clients = Client::where('uuid', null)->get();
+//
+//        foreach($clients as $client) {
+//            $client->uuid = UUID::uuid4()->toString();
+//            $client->save();
+//        }
+//
+//        $this->line('✓ Done.');
     }
 }

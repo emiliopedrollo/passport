@@ -64,11 +64,11 @@ class AccessTokenController
         if (Passport::$useClientUUIDs) {
             $rq = request();
 
-            $client = Client::where('uuid', $rq->input('client_id'))->firstOrFail();
+            $client = Client::where(Passport::$keyNameForUUIDsPK ?: 'uuid', $rq->input('client_id'))->firstOrFail();
 
             $formData = $request->getParsedBody();
 
-            array_set($formData, 'client_id', $client->id);
+            array_set($formData, 'client_id', $client->getKey());
 
             $request = $request->withParsedBody($formData);
         }
