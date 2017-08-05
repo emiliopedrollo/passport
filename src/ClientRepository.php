@@ -51,7 +51,8 @@ class ClientRepository
      */
     public function findForUser($clientId, $userId)
     {
-        return Client::where('id', $clientId)
+        $clientKey = (Passport::$useClientUUIDs)?'uuid':'id';
+        return Client::where($clientKey, $clientId)
                      ->where('user_id', $userId)
                      ->first();
     }
