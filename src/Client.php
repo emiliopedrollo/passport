@@ -14,6 +14,13 @@ class Client extends Model
     protected $table = 'oauth_clients';
 
     /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
      * The guarded attributes on the model.
      *
      * @var array
@@ -69,4 +76,14 @@ class Client extends Model
     {
         return $this->personal_access_client || $this->password_client;
     }
+
+    public function __construct(array $attributes = []) {
+        parent::__construct($attributes);
+        if (Passport::$useClientUUIDs){
+            $this->setKeyName(Passport::$keyNameForUUIDsPK ?: 'uuid');
+            $this->casts[$this->getKeyName()] = 'string';
+        }
+    }
+
+
 }

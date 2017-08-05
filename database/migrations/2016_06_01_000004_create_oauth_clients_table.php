@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Laravel\Passport\Passport;
 
 class CreateOauthClientsTable extends Migration
 {
@@ -14,7 +15,13 @@ class CreateOauthClientsTable extends Migration
     public function up()
     {
         Schema::create('oauth_clients', function (Blueprint $table) {
-            $table->increments('id');
+
+            if (!Passport::$useClientUUIDs) {
+                $table->increments('id');
+            } else {
+                $table->uuid(Passport::$keyNameForUUIDsPK ?: 'uuid')->primary();
+            }
+
             $table->integer('user_id')->index()->nullable();
             $table->string('name');
             $table->string('secret', 100);

@@ -33,7 +33,7 @@ class PersonalAccessTokenFactoryTest extends PHPUnit_Framework_TestCase
     }
 }
 
-class PersonalAccessTokenFactoryTestClientStub
+class PersonalAccessTokenFactoryTestClientStub extends Laravel\Passport\Client
 {
     public $id = 1;
     public $secret = 'something';

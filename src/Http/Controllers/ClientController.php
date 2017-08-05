@@ -4,6 +4,8 @@ namespace Laravel\Passport\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Laravel\Passport\Client;
+use Laravel\Passport\Passport;
 use Laravel\Passport\ClientRepository;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 
@@ -30,11 +32,18 @@ class ClientController
      * @param  \Illuminate\Contracts\Validation\Factory  $validation
      * @return void
      */
-    public function __construct(ClientRepository $clients,
-                                ValidationFactory $validation)
-    {
+    public function __construct(
+        ClientRepository $clients,
+        ValidationFactory $validation
+    ) {
         $this->clients = $clients;
         $this->validation = $validation;
+
+        if (!Passport::$useClientUUIDs) {
+            $this->lookup = 'find';
+        } else {
+            $this->lookup = 'findUUID';
+        }
     }
 
     /**
@@ -64,7 +73,9 @@ class ClientController
         ])->validate();
 
         return $this->clients->create(
-            $request->user()->getKey(), $request->name, $request->redirect
+            $request->user()->getKey(),
+            $request->name,
+            $request->redirect
         )->makeVisible('secret');
     }
 

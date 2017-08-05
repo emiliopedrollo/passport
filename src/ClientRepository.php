@@ -2,6 +2,9 @@
 
 namespace Laravel\Passport;
 
+use Mockery\Generator\StringManipulation\Pass\Pass;
+use Ramsey\Uuid\Uuid as UUID;
+
 class ClientRepository
 {
     /**
@@ -13,7 +16,11 @@ class ClientRepository
 
     public function find($id)
     {
-        return Client::find($id);
+        if (!Passport::$useClientUUIDs) {
+            return Client::find($id);
+        } else {
+            return Client::where(Passport::$keyNameForUUIDsPK ?: 'uuid', $id)->first();
+        }
     }
 
     /**
@@ -38,7 +45,13 @@ class ClientRepository
      */
     public function findForUser($clientId, $userId)
     {
-        return Client::where('id', $clientId)
+        if (!Passport::$useClientUUIDs){
+            $clientKey = 'id';
+        } else {
+            $clientKey = Passport::$keyNameForUUIDsPK ?: 'uuid';
+        }
+
+        return Client::where($clientKey, $clientId)
                      ->where('user_id', $userId)
                      ->first();
     }
@@ -85,7 +98,7 @@ class ClientRepository
     /**
      * Store a new client.
      *
-     * @param  int  $userId
+     * @param  mixed  $userId
      * @param  string  $name
      * @param  string  $redirect
      * @param  bool  $personalAccess
@@ -94,7 +107,7 @@ class ClientRepository
      */
     public function create($userId, $name, $redirect, $personalAccess = false, $password = false)
     {
-        $client = (new Client)->forceFill([
+        $data = [
             'user_id' => $userId,
             'name' => $name,
             'secret' => str_random(40),
@@ -102,7 +115,13 @@ class ClientRepository
             'personal_access_client' => $personalAccess,
             'password_client' => $password,
             'revoked' => false,
-        ]);
+        ];
+
+        if (Passport::$useClientUUIDs) {
+            $data[Passport::$keyNameForUUIDsPK ?: 'uuid'] = UUID::uuid4()->toString();
+        }
+
+        $client = (new Client)->forceFill($data);
 
         $client->save();
 

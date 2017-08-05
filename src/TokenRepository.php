@@ -33,7 +33,7 @@ class TokenRepository
      * Get a token by the given user ID and token ID.
      *
      * @param  string  $id
-     * @param  int  $userId
+     * @param  mixed  $userId
      * @return \Laravel\Passport\Token|null
      */
     public function findForUser($id, $userId)
