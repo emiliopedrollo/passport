@@ -18,7 +18,7 @@ class CreateOauthAccessTokensTable extends Migration
             $table->string('id', 100)->primary();
             $table->integer('user_id')->index()->nullable();
 
-            if (Passport::$useClientUUIDs) {
+            if (!Passport::$useClientUUIDs) {
                 $table->integer('client_id');
             } else {
                 $table->uuid('client_id');
