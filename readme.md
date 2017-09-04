@@ -1,4 +1,10 @@
-# Laravel Passport w/ Client UUIDs
+# Laravel Passport
+
+[![Build Status](https://travis-ci.org/laravel/passport.svg)](https://travis-ci.org/laravel/passport)
+[![Total Downloads](https://poser.pugx.org/laravel/passport/d/total.svg)](https://packagist.org/packages/laravel/passport)
+[![Latest Stable Version](https://poser.pugx.org/laravel/passport/v/stable.svg)](https://packagist.org/packages/laravel/passport)
+[![Latest Unstable Version](https://poser.pugx.org/laravel/passport/v/unstable.svg)](https://packagist.org/packages/laravel/passport)
+[![License](https://poser.pugx.org/laravel/passport/license.svg)](https://packagist.org/packages/laravel/passport)
 
 ## Introduction
 
@@ -42,4 +48,4 @@ driver, you'll need to modify the migration file manually to have it use the cor
 
 ## License
 
-Laravel Passport is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Laravel Passport is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
