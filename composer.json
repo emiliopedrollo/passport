@@ -29,7 +29,6 @@
         "phpseclib/phpseclib": "^2.0",
         "symfony/psr-http-message-bridge": "~1.0",
         "zendframework/zend-diactoros": "~1.0"
-        "ramsey/uuid": "~3.0"
     },
     "require-dev": {
         "mockery/mockery": "~0.9",
