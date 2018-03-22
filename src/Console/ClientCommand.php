@@ -61,12 +61,8 @@ class ClientCommand extends Command
             null, $name, 'http://localhost'
         );
 
-        $accessClient = new PersonalAccessClient();
-        $accessClient->client_id = $client->getKey();
-        $accessClient->save();
-
         $this->info('Personal access client created successfully.');
-        $this->line('<comment>Client ID:</comment> '.$client->getKey());
+        $this->line('<comment>Client ID:</comment> '.$client->id);
         $this->line('<comment>Client Secret:</comment> '.$client->secret);
     }
 
@@ -88,7 +84,7 @@ class ClientCommand extends Command
         );
 
         $this->info('Password grant client created successfully.');
-        $this->line('<comment>Client ID:</comment> '.$client->getKey());
+        $this->line('<comment>Client ID:</comment> '.$client->id);
         $this->line('<comment>Client Secret:</comment> '.$client->secret);
     }
 
@@ -118,7 +114,7 @@ class ClientCommand extends Command
         );
 
         $this->info('New client created successfully.');
-        $this->line('<comment>Client ID:</comment> '.$client->getKey());
+        $this->line('<comment>Client ID:</comment> '.$client->id);
         $this->line('<comment>Client secret:</comment> '.$client->secret);
     }
 }
