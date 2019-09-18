@@ -7,6 +7,7 @@
         "issues": "https://github.com/laravel/passport/issues",
         "source": "https://github.com/laravel/passport"
     },
+    "abandoned": "laravel/passport",
     "authors": [
         {
             "name": "Taylor Otwell",
