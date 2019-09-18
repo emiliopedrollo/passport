@@ -19,11 +19,10 @@ class CreateOauthAuthCodesTable extends Migration
             $table->integer('user_id');
 
             if (!Passport::$useClientUUIDs) {
-                $table->integer('client_id');
+                $table->unsignedInteger('client_id');
             } else {
                 $table->uuid('client_id');
             }
-
             $table->text('scopes')->nullable();
             $table->boolean('revoked');
             $table->dateTime('expires_at')->nullable();
@@ -37,6 +36,6 @@ class CreateOauthAuthCodesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('oauth_auth_codes');
+        Schema::dropIfExists('oauth_auth_codes');
     }
 }

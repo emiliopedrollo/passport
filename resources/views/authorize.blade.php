@@ -8,7 +8,7 @@
     <title>{{ config('app.name') }} - Authorization</title>
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 
     <style>
         .passport-authorize .container {
@@ -64,8 +64,8 @@
 
                         <div class="buttons">
                             <!-- Authorize Button -->
-                            <form method="post" action="/oauth/authorize">
-                                {{ csrf_field() }}
+                            <form method="post" action="{{ route('passport.authorizations.approve') }}">
+                                @csrf
 
                                 <input type="hidden" name="state" value="{{ $request->state }}">
                                 <input type="hidden" name="client_id" value="{{ $client->id }}">
@@ -73,9 +73,9 @@
                             </form>
 
                             <!-- Cancel Button -->
-                            <form method="post" action="/oauth/authorize">
-                                {{ csrf_field() }}
-                                {{ method_field('DELETE') }}
+                            <form method="post" action="{{ route('passport.authorizations.deny') }}">
+                                @csrf
+                                @method('DELETE')
 
                                 <input type="hidden" name="state" value="{{ $request->state }}">
                                 <input type="hidden" name="client_id" value="{{ $client->id }}">

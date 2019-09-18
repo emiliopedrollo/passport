@@ -19,11 +19,10 @@ class CreateOauthAccessTokensTable extends Migration
             $table->integer('user_id')->index()->nullable();
 
             if (!Passport::$useClientUUIDs) {
-                $table->integer('client_id');
+                $table->unsignedInteger('client_id');
             } else {
                 $table->uuid('client_id');
             }
-
             $table->string('name')->nullable();
             $table->text('scopes')->nullable();
             $table->boolean('revoked');
@@ -39,6 +38,6 @@ class CreateOauthAccessTokensTable extends Migration
      */
     public function down()
     {
-        Schema::drop('oauth_access_tokens');
+        Schema::dropIfExists('oauth_access_tokens');
     }
 }

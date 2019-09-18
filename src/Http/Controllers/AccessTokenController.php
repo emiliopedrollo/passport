@@ -12,7 +12,7 @@ use League\OAuth2\Server\AuthorizationServer;
 
 class AccessTokenController
 {
-    use HandlesOAuthErrors;
+    use ConvertsPsrResponses;
 
     /**
      * The authorization server.

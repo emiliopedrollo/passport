@@ -47,6 +47,9 @@ a `uuid` column. If you are continuing from a pre-existing installation, you nee
 in order to update your current tables. If you are running a custom connection for your database
 driver, you'll need to modify the migration file manually to have it use the correct connection.
 
+
+Documentation for Passport can be found on the [Laravel website](https://laravel.com/docs/master/passport).
+
 ## License
 
-Laravel Passport is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+Laravel Passport is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
